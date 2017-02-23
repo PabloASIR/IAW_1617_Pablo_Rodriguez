@@ -70,8 +70,10 @@ tr:hover td {
           <th>film_duration</th>
           <th>film_trailer</th>
           <th>film_date_release</th>
-          <th>Borrar</th>
+          <th>links</th>
           <th>modificar</th>
+          <th>borrar</th>
+
 
 
       </thead>
@@ -92,11 +94,14 @@ tr:hover td {
                     echo '<td>'.$obj->film_trailer.'</td>';
                     echo '<td>'.$obj->film_date_release.'</td>';
 
-                    echo '<td><a title="Borrar" href="borrar.php?id='.$obj->film_id.'">
-                    <img width="40" height="40" src="del.png" alt="Borrar" /></a></td>';
+                    echo '<td><a title="links" href="../links_films/index.php?id='.$obj->film_id.'">
+                    <img width="40" height="40" src="links.png" alt="links" /></a></td>';
 
                     echo '<td><a title="editar" href="editar.php?id='.$obj->film_id.'">
                     <img width="40" height="40" src="mod.png" alt="editar" /></a></td>';
+
+                    echo '<td><a title="Borrar" href="borrar.php?id='.$obj->film_id.'">
+                    <img width="40" height="40" src="del.png" alt="Borrar" /></a></td>';
 
 
                     //echo <td><button class="btn" action="borrar."></button></td>

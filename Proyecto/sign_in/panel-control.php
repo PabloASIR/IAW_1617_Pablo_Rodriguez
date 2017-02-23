@@ -36,7 +36,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     <li><a href ="../films/">Peliculas</a></li>
     <li><a href ="../series/">Series</a></li>
     <li><a href ="../users/">Usuarios</a></li>
-    <li>etc.</li>
+    <li><a href ="../news/">Noticias</a></li>
   </ul>
 
   <br><br>

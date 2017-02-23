@@ -101,8 +101,8 @@ if ($pass==$pass2){
   $consulta= "INSERT INTO users VALUES('',MD5('$pass'),'$login','$email','user','$language','./img/default.png');";
   $result = $connection->query($consulta);
   if (!$result) {
-      print_r("$consulta");
-     echo "Query Error";
+    //  print_r("$consulta");
+     echo "el Usuario ya existe";
   } else {
       echo "New FILM added";
   }

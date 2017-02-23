@@ -53,14 +53,14 @@ if ($result->num_rows > 0) {
     echo "Bienvenido " . $username,"!<br>";
     echo "Redireccionando... ";
     //echo "<br><br><a href=panel-control.php>Panel de Control</a>";
-    echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=panel-control.php">';
+    echo '<META HTTP-EQUIV="Refresh" CONTENT="2; URL=panel-control.php">';
 
 
 }      if(isset($username)&& $privilege == 'user'){
 
-  echo "Bienvenido! " . $_SESSION['username'];
-  echo "<br><br>Actualmente no tenemos nada disponible para un desecho humano como tu <3 </a><br>";
-  echo "  <a href=logout.php>Cerrar Sesion X </a>";
+  echo "Bienvenido " . $username,"!<br>";
+  echo "Redireccionando... ";
+  echo '<META HTTP-EQUIV="Refresh" CONTENT="2; URL=../site/index.php">';
 
         //header
 }

@@ -1,3 +1,9 @@
+
+<?php
+  session_start();
+
+
+?>
 <!DOCTYPE html>
 <html lang="">
   <head>
@@ -58,6 +64,10 @@ tr:hover td {
             //MAKING A SELECT QUERY
             /* Consultas de selección que devuelven un conjunto de resultados */
             $id = $_GET['id'];
+
+            $_SESSION['serie_actual']=$id;
+
+          //  var_dump($_SESSION['serie_actual']);
             $seleccion = "SELECT * FROM chapters where serie_id=$id;";
             $consulta = "SELECT * FROM series where serie_id=$id;";
 
@@ -73,7 +83,6 @@ tr:hover td {
                   //  var_dump($obj->chapter_name);
         ?>
 
-<input type="button" value="new chapter" onClick="location.href='newchapter.php?idserie=<?php echo $_GET['id']; ?>'" />
       <table style="border:1px solid black">
       <thead>
         <tr>
@@ -97,10 +106,10 @@ tr:hover td {
                     echo '<td>'.$obj->chapter_name.'</td>';
                     echo '<td>'.$obj->chapter_date_release.'</td>';
 
-                    echo '<td><a title="links" href="links.php?id='.$obj->chapter_id.'">
-                    <img width="40" height="40" src="links.png" alt="Borrar" /></a></td>';
+                    echo '<td><a title="links" href="../links_series/index.php?id='.$obj->chapter_id.'">
+                    <img width="40" height="40" src="links.png" alt="links" /></a></td>';
 
-                    echo '<td><a title="editar" href="editar.php?id='.$obj->chapter_id.'">
+                    echo '<td><a title="editar" href="editarchapter.php?id='.$obj->chapter_id.'">
                     <img width="40" height="40" src="mod.png" alt="editar" /></a></td>';
 
                     echo '<td><a title="Borrar" href="borrarchapter.php?id='.$obj->chapter_id.'">
@@ -127,5 +136,9 @@ echo "<form action='index.php'>
     <input type='submit' value='Volver' />
     </form>";*/
 ?>
+</table>
+<input type="button" value="new chapter" onClick="location.href='newchapter.php?idserie=<?php echo $_GET['id']; ?>'" />
+
+<input type="button" value="Volver" onClick="location.href='./index.php'" />
 </body>
 </html>

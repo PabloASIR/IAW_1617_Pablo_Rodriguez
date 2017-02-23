@@ -28,7 +28,9 @@
         echo "serie_trailer: <input name='trailer' value='$obj->serie_trailer'\><br><br>";
         echo "serie_date_release: <input type='date' name='date_release' value='$obj->serie_date_release'\><br><br>";
         echo "serie_image: <input name='image' value='$obj->serie_image'\><br><br>";
-        echo "<button name='edit'>EDITAR</button>";
+        echo "<button name='edit'>EDITAR</button>";?>
+        <input type="button" value="Volver"  onClick="location.href='./index.php'" />
+<?php
         echo "</from>";
       } else {
 

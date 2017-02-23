@@ -24,10 +24,10 @@
       }
 
       $id = $_GET['id'];
-      $seleccion = "SELECT * FROM chapters where chapter_id=$id;";
-      $idserie= $obj->serie_id;
+      $seleccion = "SELECT * FROM news where news_id=$id;";
+    //  $idchapter= $obj->chapter_id;
 
-      $consulta4 = "DELETE FROM `proyecto`.`chapters` WHERE `chapters`.`chapter_id` = $id";
+      $consulta4 = "DELETE FROM `proyecto`.`news` WHERE `news`.`news_id` = $id";
 
 //echo ($image);
         if ($result = $connection->query($seleccion)) {
@@ -50,7 +50,7 @@
               //  mysqli_error($connection);
 
           //  mysqli_error($connection);
-          header ("Location: ./chapters.php?id=".$_SESSION['serie_actual']);
+          header ("Location: ./index.php?id=".$_SESSION['capitulo_actual']);
 
       /*  echo '<br>';
         echo "<form action='index.php'>

@@ -60,18 +60,16 @@ tr:hover td {
 
       <?php
 
-        if (!isset($_POST['name'])) : ?>
-        <form action="newchapter.php" method="post" >
+        if (!isset($_POST['server'])) : ?>
+        <form action="newlink.php" method="post" >
           <fieldset>
             <legend>Add Chapter</legend>
         <!--    <span>film_id:</span><input type="text" name="id" required><br> -->
-            <span>chapter_name:</span><input type="text" name="name" required><br>
-            <span>chapter_number:</span><input type="number" name="number" ><br>
-            <span>chapter_season:</span><input type="number" name="season" ><br>
-            <span>chapter_date_release:</span><input type="date" name="date_release" ><br>
-	          <input type="submit" value="Enviar" name="send">
-            <input type="hidden" name='idserie' value="<?php echo $_GET['idserie']; ?>" />
-            <input type="button" value="Volver"  onClick="location.href='chapters.php?id=<?php echo $_SESSION['serie_actual']?>'" />
+            <span>link_server:</span><input type="text" name="server" required><br>
+            <span>link_url:</span><input type="text" name="url" ><br>
+            <input type="submit" value="Enviar" name="send">
+            <input type="hidden" name='idfilm' value="<?php echo $_GET['idfilm']; ?>" />
+            <input type="button" value="Volver"  onClick="location.href='index.php?id=<?php echo $_SESSION['capitulo_actual']?>'" />
 
            </fieldset>
         </form>
@@ -89,15 +87,15 @@ tr:hover td {
        }
 
   if (isset($_POST['send'])) {
-      $id = $_POST['idserie'];
-      $name = $_POST['name'];
-      $number = $_POST['number'];
-      $season = $_POST['season'];
-      $date_release = $_POST['date_release'];
+      $idfilm = $_POST['idfilm'];
+      $server = $_POST['server'];
+      $url = $_POST['url'];
 
-      $consulta = "INSERT INTO `proyecto`.`chapters` (`chapter_id` ,`chapter_season` ,
-`chapter_name` ,`chapter_date_release` ,`serie_id` ,`chapter_number`)
-VALUES (NULL , '$season', '$name', '$date_release', '$id', '$number');";
+
+      $consulta = "INSERT INTO  `proyecto`.`links` (
+`link_id` ,`link_url` ,`link_server` ,`film_id` ,`chapter_id`)
+VALUES (NULL ,  '$url',  '$server',  '$idfilm', NULL
+);";
       var_dump($consulta);
       $result = $connection->query($consulta);
 
@@ -105,12 +103,13 @@ VALUES (NULL , '$season', '$name', '$date_release', '$id', '$number');";
           print_r("$consulta");
           echo 'Query Error';
       } else {
-          echo 'New CHAPTER added';
-          header ("Location: ./chapters.php?id=".$_SESSION['serie_actual']);
+          echo 'New LINK added';
+          header ("Location: ./index.php?id=".$_SESSION['capitulo_actual']);
 
       }
+      $prueba = $_SESSION['capitulo_actual'];
       echo '<br>';
-      echo "<form action='chapters.php?$id'>
+      echo "<form action='index.php?.$prueba'>
             <input type='submit' value='Volver' />
             </form>";
 

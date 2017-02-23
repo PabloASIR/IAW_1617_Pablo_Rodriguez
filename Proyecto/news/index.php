@@ -57,19 +57,23 @@ tr:hover td {
             }
             //MAKING A SELECT QUERY
             /* Consultas de selección que devuelven un conjunto de resultados */
-            if ($result = $connection->query('SELECT * FROM series;')) {
+            if ($result = $connection->query('SELECT *
+              FROM news;')) {
+
+
+
+
                 ?>
-<h1>Series</h1>
+<h1>News</h1>
       <table style="border:1px solid black">
       <thead>
         <tr>
-          <th>serie_image</th>
-          <th>serie_name</th>
-          <th>serie_gender</th>
-          <th>serie_sinopsis</th>
-          <th>serie_trailer</th>
-          <th>serie_date_release</th>
-          <th>capitulos</th>
+          <th>news_image</th>
+          <th>news_title</th>
+          <th>news_info</th>
+          <th>news_date</th>
+          <th>news_url</th>
+          <th>name</th>
           <th>Borrar</th>
           <th>modificar</th>
 
@@ -84,21 +88,30 @@ tr:hover td {
                 while ($obj = $result->fetch_object()) {
                     //PRINTING EACH ROW
                     echo '<tr>';
-                    echo '<td><img src="'.$obj->serie_image.'" width=40% /></td>';
-                    echo '<td>'.$obj->serie_name.'</td>';
-                    echo '<td>'.$obj->serie_gender.'</td>';
-                    echo '<td>'.substr($obj->serie_sinopsis,0,55).'</td>';
-                    echo '<td>'.$obj->serie_trailer.'</td>';
-                    echo '<td>'.$obj->serie_date_release.'</td>';
+                    echo '<td><img src="'.$obj->news_image.'" width=40% /></td>';
+                    echo '<td>'.$obj->news_title.'</td>';
+                    echo '<td>'.substr($obj->news_info,0,55).'</td>';
+                    echo '<td>'.$obj->news_date.'</td>';
+                    echo '<td>'.substr($obj->news_url,0,55).'</td>';
 
+                    if ($obj->film_id == NULL) {
+                      $serie=$obj->serie_id;
+                      $result2 = $connection->query("SELECT serie_name
+                      FROM series WHERE serie_id='$serie;'");
+                      $obj2 = $result2->fetch_object();
+                      echo '<td>'.$obj2->serie_name.'</td>';
 
-                    echo '<td><a title="chapters" href="chapters.php?id='.$obj->serie_id.'">
-                    <img width="40" height="40" src="chapters.png" alt="Borrar" /></a></td>';
-
-                    echo '<td><a title="Borrar" href="borrar.php?id='.$obj->serie_id.'">
+                  }else{
+                    $pelicula=$obj->film_id;
+                    $result3 = $connection->query("SELECT film_name
+                    FROM films WHERE film_id='$pelicula;'");
+                    $obj3 = $result3->fetch_object();
+                    echo '<td>'.$obj3->film_name.'</td>';
+                                    }
+                    echo '<td><a title="Borrar" href="borrar.php?id='.$obj->news_id.'">
                     <img width="40" height="40" src="del.png" alt="Borrar" /></a></td>';
 
-                    echo '<td><a title="editar" href="editar.php?id='.$obj->serie_id.'">
+                    echo '<td><a title="editar" href="editar.php?id='.$obj->news_id.'">
                     <img width="40" height="40" src="mod.png" alt="editar" /></a></td>';
 
 
@@ -116,9 +129,10 @@ tr:hover td {
 
        ?>
     </table>
-    <input type="button" value="new serie" onClick="location.href='newserie.php'" />
+    <input type="button" value="add news" onClick="location.href='addnews.php'" />
 
     <input type="button" value="Volver" onClick="location.href='../sign_in/panel-control.php'" />
+
 
       <script type="text/javascript" src=" "></script>
     </body>
