@@ -24,7 +24,10 @@
   }
       if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == user) {
           $logueado = $_SESSION['username'];
-          $imagen = $_SESSION['user_image']; ?>
+          $imagen = $_SESSION['user_image'];
+          include_once("../connection.php");
+
+           ?>
 
       <div id="contenedor_global">
 
@@ -46,7 +49,9 @@
 
 <div id="contenido">
   <li>Esta es la pestaña del home</li><br>
-En la cual aun no tengo ni zora que poner :D
+Actualmente no se encuentra disponible ninguna funcion de esta pestaña<br>
+Futura apertura<br>
+
 </div>
 
 

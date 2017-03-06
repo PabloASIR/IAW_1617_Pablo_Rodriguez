@@ -6,55 +6,15 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href=" ">
-    <style>
-    body {font-family: Arial, Helvetica, sans-serif;}
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="Smart Bottom Slide Out Menu" />
+  <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
+  <link rel="stylesheet" href="../style/admin.css" type="text/css" media="screen" />
+  <link rel="stylesheet" type="text/css" href=" ">
+  <title>new link film</title>
 
-table {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
-    margin: 45px;
-    width: 480px;
-    text-align: center;
-    border-collapse: collapse;
-  }
-
-th {
-  font-size: 20px;
-  font-weight: normal;
-  padding: 7px;
-  background: #b9c9fe;
-  border-top: 4px
-  solid #aabcfe;
-  border-bottom: 1px
-  solid #fff;
-  color: #039;
- }
-
-td {
-  padding: 8px;
-  background: #e8edff;
-  border-bottom: 1px
-  solid #fff;
-  color: #669;
-  border-top: 1px
-  solid transparent;
-}
-
-tr:hover td {
-  background: #d0dafd;
-  color: #339;
-}
-      span {
-        width: 100px;
-        display: inline-block;
-      }
-    </style>
-  </head>
+</head>
   <body>
 
 
@@ -62,8 +22,6 @@ tr:hover td {
 
         if (!isset($_POST['server'])) : ?>
         <form action="newlink.php" method="post" >
-          <fieldset>
-            <legend>Add Chapter</legend>
         <!--    <span>film_id:</span><input type="text" name="id" required><br> -->
             <span>link_server:</span><input type="text" name="server" required><br>
             <span>link_url:</span><input type="text" name="url" ><br>
@@ -71,20 +29,14 @@ tr:hover td {
             <input type="hidden" name='idfilm' value="<?php echo $_GET['idfilm']; ?>" />
             <input type="button" value="Volver"  onClick="location.href='index.php?id=<?php echo $_SESSION['capitulo_actual']?>'" />
 
-           </fieldset>
         </form>
    <?php else: ?>
 
       <?php  echo '<h3>Showing data coming from the form</h3>';
         //var_dump($_POST);
         //CREATING THE CONNECTION
-        $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
-       //TESTING IF THE CONNECTION WAS RIGHT
-       if ($connection->connect_errno) {
-           printf("Connection failed: %s\n", $connection->connect_error);
-           exit();
+        include_once("../connection.php");
 
-       }
 
   if (isset($_POST['send'])) {
       $idfilm = $_POST['idfilm'];

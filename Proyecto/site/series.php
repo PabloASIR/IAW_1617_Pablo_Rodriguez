@@ -17,7 +17,7 @@
   //echo '()<img src="$imagen" width=80% />)';
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   } else {
-      echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=../sign_in/login.html">';
+      echo '<META HTTP-EQUIV="Refresh" CONTENT="2; URL=../sign_in/login.html">';
       session_destroy();
       echo 'No estas registrado';
       exit;
@@ -25,11 +25,20 @@
       if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == user) {
           $logueado = $_SESSION['username'];
           $imagen = $_SESSION['user_image']; ?>
+<?php
+      include_once("../connection.php");
+
+          //MAKING A SELECT QUERY
+          /* Consultas de selección que devuelven un conjunto de resultados */
+          if ($result = $connection->query('SELECT *
+            FROM series;')) {
+
+?>
 
       <div id="contenedor_global">
 
         <div id="cabecera">
-           cabecera
+
          </div>
          <div id="perfil">
 
@@ -44,21 +53,56 @@
 
             <div id="cuerpo">
 
+
 <div id="contenido">
-  <li>Pestaña de series</li><br>
-va a ser casi igual que la de pelis
-se viene copy paste
+  <div id="lateral">
+  </div>
+  <li>Pestaña de Series</li><br>
+  <div class="peliculas" style="width:80%;">
+
+    <?php
+    while ($obj = $result->fetch_object()) {
+      ?>
+
+        <div class="pelicula">
+          <div class="pelicula_content">
+        <?php
+            $imgserie =$obj->serie_image;
+            $serieid=$obj->serie_id;
+            // echo "<img href='seriesinfo.php?id=$serie' src='../series/$imgserie' />";
+            echo "<a href='serieinfo.php?id=$serieid'>
+            <img  src='../series/$imgserie'></a>";
+
+            echo "<h3>".substr(($obj->serie_date_release),0,4)."</h3>";
+            echo "<br>";
+              $serie=$obj->serie_id;
+              $result2 = $connection->query("SELECT TRUNCATE(avg(grade),1) AS media
+              FROM rate_series WHERE serie_id='$serie;'");
+              // var_dump($result2);
+              $obj2 = $result2->fetch_object();
+              echo '<h2>'.$obj2->media.'★</h2>';
+              echo "<h1>".$obj->serie_name."</h1>";
+
+
+
+            // echo "<p>".substr($obj->news_info,0,50)."...</p>";
+        ?>
+          </div>
+        </div>
+
+<?php } ?>
+</div>
 </div>
 
 
 
-                <ul id="navigation">
-                  <li class="a"><a id="u" href="index.php" title="Home">Home</a></li>
-                    <li class="a"><a id="u" href="news.php" title="news">News</a></li>
-                    <li class="a"><a id="u" href="films.php" title="films">Films</a></li>
-                    <li class="a"><a id="u" style="color:#F3F781;" title="series">Series</a></li>
-                    <li class="a"><a id="u" title="calendar">Calendar</a></li>
-                  </ul>
+              <ul id="navigation">
+                <li class="a"><a id="u" href="index.php" title="Home">Home</a></li>
+                  <li class="a"><a id="u" href="news.php" title="news">News</a></li>
+                  <li class="a"><a id="u" href="films.php" title="films">Films</a></li>
+                  <li class="a"><a id="u" style="color:#F3F781;" title="series">Series</a></li>
+                  <li class="a"><a id="u" title="calendar">Calendar</a></li>
+                </ul>
 
 
                 <!-- The JavaScript -->
@@ -125,7 +169,7 @@ se viene copy paste
             </div> -->
         </div>
 <?php
-      } ?>
+    }  } ?>
 </body>
 
 </html>

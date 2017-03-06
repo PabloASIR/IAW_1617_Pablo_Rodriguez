@@ -1,55 +1,15 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href=" ">
-    <style>
-    body {font-family: Arial, Helvetica, sans-serif;}
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="Smart Bottom Slide Out Menu" />
+  <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
+  <link rel="stylesheet" href="../style/admin.css" type="text/css" media="screen" />
+  <link rel="stylesheet" type="text/css" href=" ">
+  <title>users</title>
 
-table {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
-    margin: 45px;
-    width: 480px;
-    text-align: center;
-    border-collapse: collapse;
-  }
-
-th {
-  font-size: 20px;
-  font-weight: normal;
-  padding: 7px;
-  background: #b9c9fe;
-  border-top: 4px
-  solid #aabcfe;
-  border-bottom: 1px
-  solid #fff;
-  color: #039;
- }
-
-td {
-  padding: 8px;
-  background: #e8edff;
-  border-bottom: 1px
-  solid #fff;
-  color: #669;
-  border-top: 1px
-  solid transparent;
-}
-
-tr:hover td {
-  background: #d0dafd;
-  color: #339;
-}
-      span {
-        width: 100px;
-        display: inline-block;
-      }
-    </style>
-  </head>
+</head>
   <body>
 
       <!-- PHP STRUCTURE FOR CONDITIONAL HTML -->
@@ -59,8 +19,6 @@ tr:hover td {
       <?php
 		if (!isset($_POST["login"])) : ?>
         <form method="post" enctype='multipart/form-data'>
-          <fieldset>
-            <legend>Sign Up</legend>
             <span>user name:</span><input type="text" name="login" required><br>
             <span>password:</span><input type="password" name="pass" ><br>
             <span>password again:</span><input type="password" name="pass2" ><br>
@@ -81,7 +39,6 @@ tr:hover td {
 	          <input type="submit" value="Enviar" name="send">
             <input type="button" value="Volver" onClick="location.href='index.php'" />
 
-	         </fieldset>
          <?php else: ?>
 
       <?php  echo "<h3>Showing data coming from the form</h3>";

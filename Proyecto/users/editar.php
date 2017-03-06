@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href=" ">
-    </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="Smart Bottom Slide Out Menu" />
+  <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
+  <link rel="stylesheet" href="../style/admin.css" type="text/css" media="screen" />
+  <link rel="stylesheet" type="text/css" href=" ">
+  <title>users</title>
+
+</head>
     <body>
 
       <?php

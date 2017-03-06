@@ -1,9 +1,3 @@
-
-<?php
-  session_start();
-
-
-?>
 <!DOCTYPE html>
 <html lang="">
 <head>
@@ -12,28 +6,29 @@
   <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
   <link rel="stylesheet" href="../style/admin.css" type="text/css" media="screen" />
   <link rel="stylesheet" type="text/css" href=" ">
-  <title>edit link</title>
-    <body>
+  <title>edit news</title>
 
+</head>
+    <body>
       <?php
       $id = $_GET['id'];
       include_once("../connection.php");
 
-      if ($result = $connection->query("SELECT * from links
-        where link_id = '$id';")) {
+      if ($result = $connection->query("SELECT * from news
+        where news_id = '$id';")) {
 
         $obj = $result->fetch_object();
 
         echo "<form method='post'>";
       //  echo "serie_gender: <input name='gender' value='$obj->serie_gender'\><br><br>";
-        echo "link_server: <input type ='text' name='server' value='$obj->link_server'\><br><br>";
-        echo "link_url: <input type='text' name='url' value='$obj->link_url'\><br><br>";
-        //echo "chapter_season: <input name='season' value='$obj->chapter_season'\><br><br>";
-      //  echo "chapter_date_release: <input type='date' name='date_release' value='$obj->chapter_date_release'\><br><br>";
+        echo "news_title: <input type='text' name='title' value='$obj->news_title'\><br><br>";
+        echo "news_info: <input type='text' name='info' value='$obj->news_info'\><br><br>";
+        echo "news_url: <input type='text' name='url' value='$obj->news_url'\><br><br>";
+        echo "news_date: <input type='date' name='date' value='$obj->news_date'\><br><br>";
       //  echo "serie_image: <input name='image' value='$obj->serie_image'\><br><br>";
         echo "<button name='edit'>EDITAR</button>"; ?>
-        <input type="button" value="Volver"  onClick="location.href='index.php?id=<?php echo $_SESSION['capitulo_actual']?>'" />
-<?php
+        <input type="button" value="Volver"  onClick="location.href='index.php?'" />
+  <?php
         echo "</from>";
       } else {
 
@@ -45,20 +40,21 @@
       if (isset($_POST['edit'])) {
 
         //variables
-        $server=$_POST['server'];
+        $title=$_POST['title'];
+        $info=$_POST['info'];
         $url=$_POST['url'];
-
+        $date=$_POST['date'];
         //$image=$_POST['image'];
 
         //consulta
-        $consulta="UPDATE  `proyecto`.`links` SET  `link_url` =  '$url',
-`link_server` =  '$server' WHERE  `links`.`link_id` ='$id';";
+        $consulta="UPDATE  `proyecto`.`news` SET  `news_info` =  '$info',
+        `news_title` =  '$title',`news_date` =  '$date',`news_url` =  '$url' WHERE  `news`.`news_id` =$id;";
 
         var_dump($consulta);
         if ($result = $connection->query($consulta))
 
            {
-          header ("Location: ./index.php?id=".$_SESSION['capitulo_actual']);
+          header ("Location: ./index.php?");
         } else {
 
               echo "Error: " . $result . "<br>" . mysqli_error($connection);
@@ -69,4 +65,4 @@
 
       <script type="text/javascript" src=" "></script>
     </body>
-</html>
+  </html>

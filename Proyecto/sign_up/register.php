@@ -82,12 +82,8 @@ tr:hover td {
       <?php  echo "<h3>Showing data coming from the form</h3>";
         //var_dump($_POST);
         //CREATING THE CONNECTION
-        $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
-       //TESTING IF THE CONNECTION WAS RIGHT
-       if ($connection->connect_errno) {
-        printf("Connection failed: %s\n", $connection->connect_error);
-      exit();
-    }
+        include_once("../connection.php");
+
   ?>
 
   <?php

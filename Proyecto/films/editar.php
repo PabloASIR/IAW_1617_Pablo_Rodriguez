@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href=" ">
-    </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="Smart Bottom Slide Out Menu" />
+  <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
+  <link rel="stylesheet" href="../style/admin.css" type="text/css" media="screen" />
+  <link rel="stylesheet" type="text/css" href=" ">
+  <title>edit film</title>
+
+</head>
     <body>
 
       <?php
       $id = $_GET['id'];
-      $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
+      include_once("../connection.php");
 
-      if ($connection->connect_errno) {
-          printf("Connection failed: %s\n", $connection->connect_error);
-          exit();
-      }
       if ($result = $connection->query("SELECT * from films
         where film_id = '$id';")) {
 
         $obj = $result->fetch_object();
 
         echo "<form method='post'>";
-        echo "Film_gender: <input name='gender' value='$obj->film_gender'\><br><br>";
-        echo "film_name: <input name='name' value='$obj->film_name'\><br><br>";
-        echo "film_sinopsis: <input name='sinopsis' value='$obj->film_sinopsis'\><br><br>";
-        echo "film_duration: <input name='duration' value='$obj->film_duration'\><br><br>";
-        echo "film_trailer: <input name='trailer' value='$obj->film_trailer'\><br><br>";
+        echo "Film_gender: <input type='text' name='gender' value='$obj->film_gender'\><br><br>";
+        echo "film_name: <input type='text' name='name' value='$obj->film_name'\><br><br>";
+        echo "film_sinopsis: <input type='text' name='sinopsis' value='$obj->film_sinopsis'\><br><br>";
+        echo "film_duration: <input type='number' name='duration' value='$obj->film_duration'\><br><br>";
+        echo "film_trailer: <input type='text' name='trailer' value='$obj->film_trailer'\><br><br>";
         echo "film_date_release: <input type='date' name='date_release' value='$obj->film_date_release'\><br><br>";
-        echo "film_image: <input name='image' value='$obj->film_image'\><br><br>";
+        echo "film_image: <input type='text' name='image' value='$obj->film_image'\><br><br>";
         echo "<button name='edit'>EDITAR</button>";
         echo "</from>";
       } else {

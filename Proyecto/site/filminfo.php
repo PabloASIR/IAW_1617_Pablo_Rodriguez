@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="Smart Bottom Slide Out Menu" />
     <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
-    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="style2.css" type="text/css" media="screen" />
 
 </head>
 
@@ -17,7 +17,7 @@
   //echo '()<img src="$imagen" width=80% />)';
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   } else {
-      echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=../sign_in/login.html">';
+      echo '<META HTTP-EQUIV="Refresh" CONTENT="2; URL=../sign_in/login.html">';
       session_destroy();
       echo 'No estas registrado';
       exit;
@@ -28,16 +28,17 @@
 <?php
           include_once("../connection.php");
 
+          $id = $_GET['id'];
           //MAKING A SELECT QUERY
           /* Consultas de selección que devuelven un conjunto de resultados */
-          if ($result = $connection->query('SELECT *
-            FROM news limit 8;')) {
-?>
+          if ($result = $connection->query("SELECT * from films
+            where film_id = '$id';")) {
+              $obj = $result->fetch_object(); ?>
 
       <div id="contenedor_global">
 
         <div id="cabecera">
-           cabecera
+
          </div>
          <div id="perfil">
 
@@ -52,38 +53,118 @@
 
             <div id="cuerpo">
 
-<div id="contenido">
-  <li>Pestaña de noticias</li><br>
-  <div class="noticias">
-    <?php
-    while ($obj = $result->fetch_object()) {
-      ?>
 
-        <div class="noticia">
-          <div class="noticia_content">
-        <?php
-            $linknews =$obj->news_link;
-            $imgnews =$obj->news_image;
-            echo "<img src='../news/$imgnews' width=40% href='$linknews' />";
-            echo "<h3>".$obj->news_title."</h3>";
-            echo "<p>".substr($obj->news_info,0,45)."...</p>";
+<div id="contenido">
+
+  <div id="lateral">
+    <div id="trailer">
+      <?php
+      $urltrailer = $obj->film_trailer;
+
+      echo "<td><a title='trailer' href='$urltrailer'>
+      <img src='img/trailer.png' alt='trailer' /></a></td>";
+      ?>
+    </div>
+    <div id="caratula">
+    <?php
+    $imgfilm = $obj->film_image;
+              echo "<img src='../films/$imgfilm' />"; ?>
+    </div>
+
+
+    <form>
+      <p class="clasificacion">
+          <input id="radio1" name="estrellas" value="5" type="radio"><!--
+        --><label for="radio1">★</label><!--
+        --><input id="radio2" name="estrellas" value="4" type="radio"><!--
+        --><label for="radio2">★</label><!--
+        --><input id="radio3" name="estrellas" value="3" type="radio"><!--
+        --><label for="radio3">★</label><!--
+        --><input id="radio4" name="estrellas" value="2" type="radio"><!--
+        --><label for="radio4">★</label><!--
+        --><input id="radio5" name="estrellas" value="1" type="radio"><!--
+        --><label for="radio5">★</label>
+
+      </p>
+    </form>
+
+
+
+
+  <?php
+    echo '<br>';
+              $result2 = $connection->query("SELECT TRUNCATE(avg(grade),2) AS media
+      FROM rate_films WHERE film_id='$id;'");
+              $obj2 = $result2->fetch_object();
+              echo '<h2>Rate Users = '.$obj2->media.'</h2>'; ?>
+
+
+</div>
+  <div class="peliculas" style="width:70%;">
+        <div class="pelicula">
+          <div class="pelicula_content">
+            <div id="nombre">
+          <?php
+          $name = $obj->film_name;
+              echo "<h1>$name</h1>"; ?>
+        </div>
+
+            <div id="sinopsis">
+              <?php
+              $sinopsis = $obj->film_sinopsis;
+              echo "<h3>$sinopsis</h3>"; ?>
+            </div>
+
+
+
+            <div id="enlaces">
+              <table style="border:1px solid black">
+              <thead>
+                <tr>
+                  <th>Server</th>
+                  <th>URL</th>
+              </thead>
+
+              <?php
+              $seleccion = "SELECT * FROM links where film_id='$id';";
+              $result3 = $connection->query($seleccion);
+
+                        while ($obj3 = $result3->fetch_object()) {
+
+                            echo '<tr>';
+                            echo '<td>'.$obj3->link_server.'</td>';
+                            $url=$obj3->link_url;
+                            // var_dump($url);
+                            echo "<td><a title='url' href='http://www.$url'>
+                            <img width='40' height='40' src='img/play.png' alt='editar' /></a></td>";
+
+                            //echo <td><button class="btn" action="borrar."></button></td>
+
+                            echo '</tr>';
+                        }
+                        }
+
         ?>
+
+
+
+
+            </div>
           </div>
         </div>
 
-<?php } ?>
 </div>
 </div>
 
 
 
-                <ul id="navigation">
-                  <li class="a"><a id="u" href="index.php" title="Home">Home</a></li>
-                    <li class="a"><a id="u" style="color:#F3F781;" title="news">News</a></li>
-                    <li class="a"><a id="u" href="films.php" title="films">Films</a></li>
-                    <li class="a"><a id="u" href="series.php" title="series">Series</a></li>
-                    <li class="a"><a id="u" title="calendar">Calendar</a></li>
-                  </ul>
+              <ul id="navigation">
+                <li class="a"><a id="u" href="index.php" title="Home">Home</a></li>
+                  <li class="a"><a id="u" href="news.php" title="news">News</a></li>
+                  <li class="a"><a id="u" href="films.php" title="films">Films</a></li>
+                  <li class="a"><a id="u" href="series.php" title="series">Series</a></li>
+                  <li class="a"><a id="u" title="calendar">Calendar</a></li>
+                </ul>
 
 
                 <!-- The JavaScript -->
@@ -150,7 +231,9 @@
             </div> -->
         </div>
 <?php
-    }  } ?>
+
+          }
+       ?>
 </body>
 
 </html>

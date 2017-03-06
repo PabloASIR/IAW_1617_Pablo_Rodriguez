@@ -4,12 +4,8 @@ session_start();
 
 <?php
 //conexion
-$connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
+include_once("../connection.php");
 
-//comprobación de errores
-if ($connection->connect_error) {
- die("La conexion falló: " . $connection->connect_error);
-}
 
 //var_dump($_POST);
 

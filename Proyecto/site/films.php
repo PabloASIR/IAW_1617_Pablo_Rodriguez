@@ -26,17 +26,13 @@
           $logueado = $_SESSION['username'];
           $imagen = $_SESSION['user_image']; ?>
 <?php
-          $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
+          include_once("../connection.php");
 
-          //TESTING IF THE CONNECTION WAS RIGHT
-          if ($connection->connect_errno) {
-              printf("Connection failed: %s\n", $connection->connect_error);
-              exit();
-          }
           //MAKING A SELECT QUERY
           /* Consultas de selección que devuelven un conjunto de resultados */
           if ($result = $connection->query('SELECT *
-            FROM films;')) {
+            FROM films
+            limit 8;')) {
 ?>
 
       <div id="contenedor_global">
@@ -57,27 +53,38 @@
 
             <div id="cuerpo">
 
+
 <div id="contenido">
-  <li>Pestaña de Pelícuals</li><br>
-  <div class="peliculas">
+  <div id="lateral">
+  </div>
+  <li>Pestaña de Películas</li><br>
+  <div class="peliculas" style="width:80%;">
+
     <?php
     while ($obj = $result->fetch_object()) {
       ?>
 
         <div class="pelicula">
-          <div class="pelicula_content">
+          <div class="pelicula_content"
+          >
         <?php
-            $imgfilm =$obj->film_image;
-            echo "<img src='../films/$imgfilm' />";
+        $imgfilm =$obj->film_image;
+        $filmid=$obj->film_id;
+        // echo "<img href='seriesinfo.php?id=$serie' src='../series/$imgserie' />";
+        echo "<a href='filminfo.php?id=$filmid'>
+        <img  src='../films/$imgfilm'></a>";
+
 
             echo "<h3>".substr(($obj->film_date_release),0,4)."</h3>";
             echo "<br>";
               $pelicula=$obj->film_id;
-              $result2 = $connection->query("SELECT TRUNCATE(avg(grade),2) AS media
+              $result2 = $connection->query("SELECT TRUNCATE(avg(grade),1) AS media
               FROM rate_films WHERE film_id='$pelicula;'");
               // var_dump($result2);
               $obj2 = $result2->fetch_object();
-              echo '<h2>'.$obj2->media.'</h2>';
+              echo '<h2>'.$obj2->media.'★</h2>';
+              echo "<h1>".$obj->film_name."</h1></center>";
+
 
 
             // echo "<p>".substr($obj->news_info,0,50)."...</p>";

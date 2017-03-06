@@ -1,60 +1,17 @@
 <!DOCTYPE html>
 <html lang="">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>films</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="Smart Bottom Slide Out Menu" />
+    <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
+    <link rel="stylesheet" href="../style/admin.css" type="text/css" media="screen" />
     <link rel="stylesheet" type="text/css" href=" ">
     </head>
-    <style>
-    body {font-family: Arial, Helvetica, sans-serif;}
-
-table {
-  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
-    margin: 45px;
-    width: 480px;
-    text-align: center;
-    border-collapse: collapse;
-  }
-
-th {
-  font-size: 20px;
-  font-weight: normal;
-  padding: 7px;
-  background: #b9c9fe;
-  border-top: 4px
-  solid #aabcfe;
-  border-bottom: 1px
-  solid #fff;
-  color: #039;
- }
-
-td {
-  padding: 8px;
-  background: #e8edff;
-  border-bottom: 1px
-  solid #fff;
-  color: #669;
-  border-top: 1px
-  solid transparent;
-}
-
-tr:hover td {
-  background: #d0dafd;
-  color: #339;
-}
-</style>
     <body>
       <?php
-            //CREATING THE CONNECTION
-            $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
+            include_once("../connection.php");
 
-            //TESTING IF THE CONNECTION WAS RIGHT
-            if ($connection->connect_errno) {
-                printf("Connection failed: %s\n", $connection->connect_error);
-                exit();
-            }
             //MAKING A SELECT QUERY
             /* Consultas de selección que devuelven un conjunto de resultados */
             if ($result = $connection->query('SELECT * FROM films;')) {
@@ -71,8 +28,8 @@ tr:hover td {
           <th>film_trailer</th>
           <th>film_date_release</th>
           <th>links</th>
-          <th>modificar</th>
-          <th>borrar</th>
+          <th>edit</th>
+          <th>delete</th>
 
 
 

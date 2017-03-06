@@ -17,7 +17,7 @@
   //echo '()<img src="$imagen" width=80% />)';
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   } else {
-      echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=../sign_in/login.html">';
+      echo '<META HTTP-EQUIV="Refresh" CONTENT="2; URL=../sign_in/login.html">';
       session_destroy();
       echo 'No estas registrado';
       exit;
@@ -31,13 +31,14 @@
           //MAKING A SELECT QUERY
           /* Consultas de selección que devuelven un conjunto de resultados */
           if ($result = $connection->query('SELECT *
-            FROM news limit 8;')) {
+            FROM films
+            limit 6;')) {
 ?>
 
       <div id="contenedor_global">
 
         <div id="cabecera">
-           cabecera
+
          </div>
          <div id="perfil">
 
@@ -52,26 +53,103 @@
 
             <div id="cuerpo">
 
+
 <div id="contenido">
-  <li>Pestaña de noticias</li><br>
-  <div class="noticias">
+  <div id="lateral">
+  </div>
+  <div id="passwords" style="width:80%;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <?php
-    while ($obj = $result->fetch_object()) {
-      ?>
+    if (!isset($_POST["login"])) : ?>
+      <form method="post" enctype='multipart/form-data'>
+          <span>old password:</span><input type="password" name="oldpass" required><br>
+          <span>password:</span><input type="password" name="pass" ><br>
+          <span>password again:</span><input type="password" name="pass2" /><br>
+          <input type="submit" value="Enviar" name="send"/>
 
-        <div class="noticia">
-          <div class="noticia_content">
-        <?php
-            $linknews =$obj->news_link;
-            $imgnews =$obj->news_image;
-            echo "<img src='../news/$imgnews' width=40% href='$linknews' />";
-            echo "<h3>".$obj->news_title."</h3>";
-            echo "<p>".substr($obj->news_info,0,45)."...</p>";
-        ?>
-          </div>
-        </div>
+      </form>
+       <?php else: ?>
 
-<?php } ?>
+    <?php  echo "<h3>Showing data coming from the form</h3>";
+      //var_dump($_POST);
+      //CREATING THE CONNECTION
+      include_once("../connection.php");
+
+    ?>
+
+    <?php
+
+    if (isset($_POST['send'])) {
+    $oldpass=$_POST['oldpass'];
+    $pass=$_POST['pass'];
+    $pass2=$_POST['pass2'];
+    $consultapass= "SELECT * FROM users WHERE user_login = '$logueado'; ";
+    $resultpass = $connection->query($consultapass);
+    $objpass = $resultpass->fetch_object();
+    $pass76= $obj->user_pass;
+
+if ($pass76 == $oldpass) {
+
+
+    if ($pass==$pass2){
+    $consulta= "UPDATE  `proyecto`.`users` SET  `user_pass` = MD5('$pass') WHERE  `users`.`user_login` ='$logueado';";
+    $result = $connection->query($consulta);
+    if (!$result) {
+    //  print_r("$consulta");
+    echo "el Usuario ya existe";
+    } else {
+    }
+    echo '<br>';
+    echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=register.php">';
+    //echo "PRODUCT ADDED";
+    }else {
+    echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=register.php">';
+    echo 'Passwords don´t match';}
+  }
+  else {
+echo "password not found";  }
+
+}
+    ?>
+
+    <?php endif ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 </div>
 
@@ -79,7 +157,7 @@
 
                 <ul id="navigation">
                   <li class="a"><a id="u" href="index.php" title="Home">Home</a></li>
-                    <li class="a"><a id="u" style="color:#F3F781;" title="news">News</a></li>
+                    <li class="a"><a id="u" href="news.php" title="news">News</a></li>
                     <li class="a"><a id="u" href="films.php" title="films">Films</a></li>
                     <li class="a"><a id="u" href="series.php" title="series">Series</a></li>
                     <li class="a"><a id="u" title="calendar">Calendar</a></li>

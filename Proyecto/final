@@ -1,0 +1,16 @@
+cosas que me quedan por hacer:
+
+  d)dar una opcion para cambiar la contraseña
+3- añadir la opcion de valorar en la parte de usuario y la opcion de añadir enlaces
+4- Añadir estilos a la parte de administrador y asegurarla con permisos
+5- revisar la parte de administrador referente a las noticias
+5.2- revisar la parte de administracion con datos
+
+
+OPCIONAL
+6- añadir filtros en series y peliculasm por orden alfabetico, mas vistas, mejores valoradas...
+7- añadir la opcion de calendario referente a series y peliculas
+8- ordenar los capitulos por temporadas
+9- introducir javascript en opciones de administracion
+10- cuando se bane un usuario administrador, al volver a ser usuario pase a la foto
+de usuario por defecto, cuando el usuario es baneado tambien se le pondra la foto de usuario por defecto

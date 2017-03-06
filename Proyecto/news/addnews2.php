@@ -57,23 +57,19 @@ tr:hover td {
       <!-- So we must show the form -->
 
       <?php
-		if (!isset($_POST["login"])) : ?>
+		if (!isset($_POST["name"])) : ?>
         <form method="post" enctype='multipart/form-data'>
           <fieldset>
-            <legend>Sign Up</legend>
-            <span>user name:</span><input type="text" name="login" required><br>
-            <span>password:</span><input type="password" name="pass" ><br>
-            <span>email:</span><input type="email" name="email" required><br>
-            <span>language:</span>
-              <select id="language" name="language" class = "language" required>
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
-              </select><br>
-
-            <span>Image: </span>
+            <legend>Add Film</legend>
+        <!--    <span>film_id:</span><input type="text" name="id" required><br> -->
+            <span>news_title:</span><input type="text" name="title" required><br>
+            <span>news_info:</span><input type="text" name="info" ><br>
+            <span>news_url:</span><input type="text" name="url" ><br>
+            <span>news_date:</span><input type="date" name="date" ><br>
+            <label>news_image: </label>
             <input class="form-control" type="file" name="image" required /><br><br>
 	          <input type="submit" value="Enviar" name="send">
-            <input type="button" value="Volver" onClick="location.href='../sign_in/login.html'" />
+            <input type="button" value="Volver" onClick="location.href='index.php'" />
 
 	         </fieldset>
          <?php else: ?>
@@ -87,12 +83,13 @@ tr:hover td {
 
   <?php
   if (isset($_POST['send'])) {
-    $login=$_POST['login'];
-    $pass=$_POST['pass'];
-    $email=$_POST['email'];
-    $language=$_POST['language'];
+    $id=$_POST['id'];
+    $info=$_POST['info'];
+    $url=$_POST['url'];
+    $title=$_POST['title'];
+    $date=$_POST['date'];
     $tmp_file = $_FILES['image']['tmp_name'];
-    $target_dir = "../users/img/";
+    $target_dir = "img/";
     foreach ($_FILES as $key => $value) {
       foreach ($value as $key2 => $value2) {
         if ($key2 == name ) {
@@ -125,8 +122,14 @@ tr:hover td {
       //Put the file in its place
       var_dump("$tmp_file --- $target_file");
       move_uploaded_file($tmp_file, $target_file);
-      $consulta= "INSERT INTO users VALUES('','1',MD5('$pass'),'$login','$email','user','$language','$target_file');";
+
+      $consulta= "INSERT INTO  `proyecto`.`news` (
+`news_id` ,`news_info` ,`news_image` ,`news_title` ,`news_date` ,`news_url` ,`serie_id` ,`film_id`)
+VALUES (NULL ,  '$info',  '$target_file',  '$title',  '$date',  '$url',  NULL, NULL
+);";
       $result = $connection->query($consulta);
+      header ("Location: ./index.php");
+
       if (!$result) {
           print_r("$consulta");
          echo "Query Error";
@@ -145,5 +148,6 @@ tr:hover td {
 
 <?php endif ?>
 <br>
+
   </body>
 </html>
