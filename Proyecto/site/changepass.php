@@ -31,8 +31,7 @@
           //MAKING A SELECT QUERY
           /* Consultas de selección que devuelven un conjunto de resultados */
           if ($result = $connection->query('SELECT *
-            FROM films
-            limit 6;')) {
+            FROM users;')) {
 ?>
 
       <div id="contenedor_global">
@@ -73,7 +72,7 @@
 
 
     <?php
-    if (!isset($_POST["login"])) : ?>
+    if (!isset($_POST["oldpass"])) : ?>
       <form method="post" enctype='multipart/form-data'>
           <span>old password:</span><input type="password" name="oldpass" required><br>
           <span>password:</span><input type="password" name="pass" ><br>
@@ -94,12 +93,13 @@
 
     if (isset($_POST['send'])) {
     $oldpass=$_POST['oldpass'];
+    $oldpass=md5($oldpass);
     $pass=$_POST['pass'];
     $pass2=$_POST['pass2'];
     $consultapass= "SELECT * FROM users WHERE user_login = '$logueado'; ";
     $resultpass = $connection->query($consultapass);
     $objpass = $resultpass->fetch_object();
-    $pass76= $obj->user_pass;
+    $pass76= $objpass->user_pass;
 
 if ($pass76 == $oldpass) {
 
@@ -107,16 +107,20 @@ if ($pass76 == $oldpass) {
     if ($pass==$pass2){
     $consulta= "UPDATE  `proyecto`.`users` SET  `user_pass` = MD5('$pass') WHERE  `users`.`user_login` ='$logueado';";
     $result = $connection->query($consulta);
+    // var_dump($consulta);
+
     if (!$result) {
-    //  print_r("$consulta");
-    echo "el Usuario ya existe";
+
     } else {
     }
     echo '<br>';
-    echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=register.php">';
-    //echo "PRODUCT ADDED";
+
+echo "password changed";
+header ("Location: ./index.php");
+
+
     }else {
-    echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=register.php">';
+
     echo 'Passwords don´t match';}
   }
   else {

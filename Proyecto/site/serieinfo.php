@@ -7,6 +7,8 @@
     <meta name="description" content="Smart Bottom Slide Out Menu" />
     <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
     <link rel="stylesheet" href="style2.css" type="text/css" media="screen" />
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
+    </script>
 
 </head>
 
@@ -74,8 +76,8 @@
   ?>
     </div>
 
-    <form>
-      <p class="clasificacion">
+        <form id="bea" method='post'>
+          <p class="clasificacion">
           <input id="radio1" name="estrellas" value="5" type="radio"><!--
         --><label for="radio1">★</label><!--
         --><input id="radio2" name="estrellas" value="4" type="radio"><!--
@@ -90,7 +92,32 @@
       </p>
     </form>
 
+<?php
 
+if (isset($_POST['estrellas'])) {
+  $selector44="SELECT * from users where user_login = '$logueado';";
+  $iduser = $connection->query($selector44);
+  $objeto44 = $iduser->fetch_object();
+
+  $selector33="SELECT * from rate_series where user_id = '$objeto44->user_id'
+  AND serie_id = '$id';";
+  $lalala = $connection->query($selector33);
+  $objeto33 = $lalala->fetch_object();
+
+$valora=$objeto33->grade;
+
+  if ($valora !=='1' && $valora !=='2' && $valora !=='3' && $valora !=='4' && $valora !=='5') {
+  $estrella=$_POST['estrellas'];
+  $res = $connection->query("INSERT INTO  `proyecto`.`rate_series` (`user_id` ,`serie_id` ,`comments` ,`grade`)
+  VALUES ('$objeto44->user_id',  '$id',  '',  '$estrella');");
+}else {
+  $estrella=$_POST['estrellas'];
+  $res2 = $connection->query("UPDATE  `proyecto`.`rate_series` SET  `grade` =  '$estrella'
+    WHERE  `rate_series`.`user_id` ='$objeto44->user_id' AND  `rate_series`.`serie_id` ='$id';");
+}
+}
+
+ ?>
 
   <?php
     echo "<br>";
@@ -184,6 +211,13 @@
 </div>
 </div>
 
+<script type='text/javascript'>
+  $(document).ready(function() {
+   $('input[name=estrellas]').change(function(){
+        $('#bea').submit();
+   });
+  });
+</script>
 
 
               <ul id="navigation">

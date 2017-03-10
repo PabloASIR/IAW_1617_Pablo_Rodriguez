@@ -100,7 +100,7 @@ if ($pass==$pass2){
     //  print_r("$consulta");
      echo "el Usuario ya existe";
   } else {
-      echo "New FILM added";
+      echo "New USER added";
   }
   echo '<br>';
   echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=register.php">';

@@ -46,7 +46,7 @@
                     echo '<tr>';
                     echo '<td><img src="'.$obj->news_image.'" width=40% /></td>';
                     echo '<td>'.$obj->news_title.'</td>';
-                    echo '<td>'.substr($obj->news_info,0,55).'</td>';
+                    echo '<td>'.substr($obj->news_info,0,65)."...".'</td>';
                     echo '<td>'.$obj->news_date.'</td>';
                     echo '<td>'.substr($obj->news_url,0,55).'</td>';
 

@@ -6,22 +6,21 @@
 ?>
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href=" ">
-    </head>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="Smart Bottom Slide Out Menu" />
+  <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
+  <link rel="stylesheet" href="../style/admin.css" type="text/css" media="screen" />
+  <link rel="stylesheet" type="text/css" href=" ">
+  <title>edit chapter</title>
+
+</head>
     <body>
 
       <?php
       $id = $_GET['id'];
-      $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
+      include_once("../connection.php");
 
-      if ($connection->connect_errno) {
-          printf("Connection failed: %s\n", $connection->connect_error);
-          exit();
-      }
       if ($result = $connection->query("SELECT * from chapters
         where chapter_id = '$id';")) {
 
@@ -29,9 +28,9 @@
 
         echo "<form method='post'>";
       //  echo "serie_gender: <input name='gender' value='$obj->serie_gender'\><br><br>";
-        echo "chapter_name: <input name='name' value='$obj->chapter_name'\><br><br>";
-        echo "chapter_number: <input name='number' value='$obj->chapter_number'\><br><br>";
-        echo "chapter_season: <input name='season' value='$obj->chapter_season'\><br><br>";
+        echo "chapter_name: <input type='text' name='name' value='$obj->chapter_name'\><br><br>";
+        echo "chapter_number: <input type='number' name='number' value='$obj->chapter_number'\><br><br>";
+        echo "chapter_season: <input type='number' name='season' value='$obj->chapter_season'\><br><br>";
         echo "chapter_date_release: <input type='date' name='date_release' value='$obj->chapter_date_release'\><br><br>";
       //  echo "serie_image: <input name='image' value='$obj->serie_image'\><br><br>";
         echo "<button name='edit'>EDITAR</button>"; ?>

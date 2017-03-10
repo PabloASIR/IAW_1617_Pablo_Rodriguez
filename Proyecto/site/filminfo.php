@@ -7,6 +7,9 @@
     <meta name="description" content="Smart Bottom Slide Out Menu" />
     <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
     <link rel="stylesheet" href="style2.css" type="text/css" media="screen" />
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>
+    </script>
+
 
 </head>
 
@@ -72,7 +75,7 @@
     </div>
 
 
-    <form>
+    <form id="bea" method='post'>
       <p class="clasificacion">
           <input id="radio1" name="estrellas" value="5" type="radio"><!--
         --><label for="radio1">★</label><!--
@@ -87,7 +90,32 @@
 
       </p>
     </form>
+    <?php
 
+    if (isset($_POST['estrellas'])) {
+      $selector44="SELECT * from users where user_login = '$logueado';";
+      $iduser = $connection->query($selector44);
+      $objeto44 = $iduser->fetch_object();
+
+      $selector33="SELECT * from rate_films where user_id = '$objeto44->user_id'
+      AND film_id = '$id';";
+      $lalala = $connection->query($selector33);
+      $objeto33 = $lalala->fetch_object();
+
+      $valora=$objeto33->grade;
+
+      if ($valora !=='1' && $valora !=='2' && $valora !=='3' && $valora !=='4' && $valora !=='5') {
+      $estrella=$_POST['estrellas'];
+      $res = $connection->query("INSERT INTO `proyecto`.`rate_films` (`user_id` ,`film_id` ,`comments` ,`grade`)
+     VALUES ('$objeto44->user_id',  '$id',  '',  '$estrella');");
+    }else {
+      $estrella=$_POST['estrellas'];
+      $res2 = $connection->query("UPDATE  `proyecto`.`rate_films` SET  `grade` =  '$estrella'
+        WHERE  `rate_films`.`user_id` ='$objeto44->user_id' AND  `rate_films`.`film_id` ='$id';");
+    }
+    }
+
+     ?>
 
 
 
@@ -106,7 +134,30 @@
             <div id="nombre">
           <?php
           $name = $obj->film_name;
-              echo "<h1>$name</h1>"; ?>
+          echo "<h1>$name</h1>";
+
+             ?>
+        </div>
+        <div id="eye">
+          <?php
+          $selector="SELECT * from users where user_login = '$logueado';";
+          $iduser = $connection->query($selector);
+          $objeto = $iduser->fetch_object();
+
+          $selector2="SELECT * FROM see_films WHERE user_id = '$objeto->user_id'
+          AND film_id = '$obj->film_id';";
+          $cons = $connection->query($selector2);
+          $objsee = $cons->fetch_object();
+          if($objsee->saw == 1){
+              echo '<a title="see" href="visto2.php?id='.$obj->film_id.'">
+             <img width="40" height="40" src="img/black.png" alt="see" /></a>';
+
+          }else {
+              echo '<a title="see" href="visto2.php?id='.$obj->film_id.'">
+          <img width="40" height="40" src="img/white.png" alt="see" /></a>';
+
+        }
+?>
         </div>
 
             <div id="sinopsis">
@@ -135,7 +186,7 @@
                             echo '<td>'.$obj3->link_server.'</td>';
                             $url=$obj3->link_url;
                             // var_dump($url);
-                            echo "<td><a title='url' href='http://www.$url'>
+                            echo "<td><a title='url' href='$url'>
                             <img width='40' height='40' src='img/play.png' alt='editar' /></a></td>";
 
                             //echo <td><button class="btn" action="borrar."></button></td>
@@ -152,7 +203,13 @@
             </div>
           </div>
         </div>
-
+        <script type='text/javascript'>
+          $(document).ready(function() {
+           $('input[name=estrellas]').change(function(){
+                $('#bea').submit();
+           });
+          });
+        </script>
 </div>
 </div>
 

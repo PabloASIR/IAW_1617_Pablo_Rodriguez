@@ -62,9 +62,10 @@
         <div class="noticia">
           <div class="noticia_content">
         <?php
-            $linknews =$obj->news_link;
+            $linknews =$obj->news_url;
             $imgnews =$obj->news_image;
-            echo "<img src='../news/$imgnews' width=40% href='$linknews' />";
+            echo "<a href='$linknews'>
+            <img  src='../news/$imgnews'></a>";
             echo "<h3>".$obj->news_title."</h3>";
             echo "<p>".substr($obj->news_info,0,45)."...</p>";
         ?>

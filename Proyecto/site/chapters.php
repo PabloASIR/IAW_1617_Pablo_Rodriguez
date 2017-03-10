@@ -116,7 +116,7 @@
                               echo '<td>'.$obj3->link_server.'</td>';
                               $url=$obj3->link_url;
                               // var_dump($url);
-                              echo "<td><a title='url' href='http://www.$url'>
+                              echo "<td><a title='url' href='$url'>
                               <img width='40' height='40' src='img/play.png' alt='editar' /></a></td>";
 
                               //echo <td><button class="btn" action="borrar."></button></td>

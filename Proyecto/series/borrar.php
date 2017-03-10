@@ -9,13 +9,7 @@
     <body>
       <?php
       //CREATING THE CONNECTION
-      $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
-
-      //TESTING IF THE CONNECTION WAS RIGHT
-      if ($connection->connect_errno) {
-          printf("Connection failed: %s\n", $connection->connect_error);
-          exit();
-      }
+      include_once("../connection.php");
 
       $id = $_GET['id'];
       $seleccion = "SELECT * FROM series where serie_id=$id;";
