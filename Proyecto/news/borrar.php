@@ -22,7 +22,7 @@
       $seleccion = "SELECT * FROM news where news_id=$id;";
     //  $idchapter= $obj->chapter_id;
 
-      $consulta4 = "DELETE FROM `proyecto`.`news` WHERE `news`.`news_id` = $id";
+      $consulta4 = "DELETE FROM news WHERE news_id = $id";
 
 //echo ($image);
         if ($result = $connection->query($seleccion)) {

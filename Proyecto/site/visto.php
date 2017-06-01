@@ -18,14 +18,14 @@ $obj=$result5->fetch_object();
 $visto = $obj->saw;
 var_dump($visto);
 if ($visto == '1') {
-  $consulta= "UPDATE  `proyecto`.`see_chapters` SET  `saw` =  '0'
-  WHERE  `see_chapters`.`chapter_id` ='$id' AND  `see_chapters`.`user_id` ='$objeto->user_id';";
+  $consulta= "UPDATE see_chapters SET  `saw` =  '0'
+  WHERE chapter_id ='$id' AND user_id ='$objeto->user_id';";
 }
 else if ($visto == '0') {
-  $consulta= "UPDATE  `proyecto`.`see_chapters` SET  `saw` =  '1'
-  WHERE  `see_chapters`.`chapter_id` ='$id' AND  `see_chapters`.`user_id` ='$objeto->user_id';";
+  $consulta= "UPDATE see_chapters SET  `saw` =  '1'
+  WHERE chapter_id ='$id' AND user_id ='$objeto->user_id';";
 } else {
-  $consulta= "INSERT INTO  `proyecto`.`see_chapters` (
+  $consulta= "INSERT INTO see_chapters (
   `chapter_id` ,`user_id` ,`saw`)
   VALUES ('$id',  '$iduserf',  '1');";
 }

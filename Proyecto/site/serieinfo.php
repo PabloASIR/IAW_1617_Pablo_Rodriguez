@@ -24,7 +24,7 @@
       echo 'No estas registrado';
       exit;
   }
-      if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == user) {
+      if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == 'user') {
           $logueado = $_SESSION['username'];
           $imagen = $_SESSION['user_image']; ?>
 <?php
@@ -108,12 +108,12 @@ $valora=$objeto33->grade;
 
   if ($valora !=='1' && $valora !=='2' && $valora !=='3' && $valora !=='4' && $valora !=='5') {
   $estrella=$_POST['estrellas'];
-  $res = $connection->query("INSERT INTO  `proyecto`.`rate_series` (`user_id` ,`serie_id` ,`comments` ,`grade`)
+  $res = $connection->query("INSERT INTO rate_series (`user_id` ,`serie_id` ,`comments` ,`grade`)
   VALUES ('$objeto44->user_id',  '$id',  '',  '$estrella');");
 }else {
   $estrella=$_POST['estrellas'];
-  $res2 = $connection->query("UPDATE  `proyecto`.`rate_series` SET  `grade` =  '$estrella'
-    WHERE  `rate_series`.`user_id` ='$objeto44->user_id' AND  `rate_series`.`serie_id` ='$id';");
+  $res2 = $connection->query("UPDATE rate_series SET  `grade` =  '$estrella'
+    WHERE  `rate_series`.`user_id` ='$objeto44->user_id' AND serie_id ='$id';");
 }
 }
 

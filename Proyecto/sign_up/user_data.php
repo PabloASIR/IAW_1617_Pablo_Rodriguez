@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href=" ">
     <style>
     body {font-family: Arial, Helvetica, sans-serif;}
+    //NO SE USA
 
 table {
   font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
@@ -51,7 +52,6 @@ tr:hover td {
     </style>
   </head>
   <body>
-
       <!-- PHP STRUCTURE FOR CONDITIONAL HTML -->
       <!-- FIRST TIME. NO DATA IN THE POST (checking a required form field) -->
       <!-- So we must show the form -->
@@ -131,7 +131,7 @@ tr:hover td {
           print_r("$consulta");
          echo "Query Error";
       } else {
-          echo "New FILM added";
+          echo "New USER added";
       }
       echo '<br>';
       echo "<form action='newfilm.php'>

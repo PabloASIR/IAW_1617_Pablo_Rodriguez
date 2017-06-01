@@ -94,13 +94,15 @@ tr:hover td {
     $email=$_POST['email'];
     $language=$_POST['language'];
 if ($pass==$pass2){
-  $consulta= "INSERT INTO users VALUES('',MD5('$pass'),'$login','$email','user','$language','./img/default.png');";
+  $consulta= "INSERT INTO users VALUES('',MD5('$pass'),'$login','$email','user','$language','./img/default.png','1');";
   $result = $connection->query($consulta);
   if (!$result) {
     //  print_r("$consulta");
      echo "el Usuario ya existe";
   } else {
       echo "New USER added";
+      echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=../sign_in/login.html">';
+
   }
   echo '<br>';
   echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=register.php">';

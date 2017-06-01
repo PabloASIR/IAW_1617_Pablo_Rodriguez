@@ -44,7 +44,7 @@
       $url = $_POST['url'];
 
 
-      $consulta = "INSERT INTO  `proyecto`.`links` (
+      $consulta = "INSERT INTO  links (
 `link_id`,`link_url` ,`link_server`,`film_id`,`chapter_id`)
 VALUES (NULL ,  '$url',  '$server', NULL ,  '$idchapter');";
       var_dump($consulta);

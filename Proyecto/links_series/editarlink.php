@@ -53,8 +53,8 @@
         //$image=$_POST['image'];
 
         //consulta
-        $consulta="UPDATE  `proyecto`.`links` SET  `link_url` =  '$url',
-`link_server` =  '$server' WHERE  `links`.`link_id` ='$id';";
+        $consulta="UPDATE links SET  `link_url` =  '$url',
+`link_server` =  '$server' WHERE  link_id ='$id';";
 
         var_dump($consulta);
         if ($result = $connection->query($consulta))

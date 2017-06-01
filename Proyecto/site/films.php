@@ -22,7 +22,7 @@
       echo 'No estas registrado';
       exit;
   }
-      if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == user) {
+      if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == 'user') {
           $logueado = $_SESSION['username'];
           $imagen = $_SESSION['user_image']; ?>
 <?php

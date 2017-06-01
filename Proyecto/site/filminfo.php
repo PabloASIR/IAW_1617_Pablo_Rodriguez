@@ -25,7 +25,7 @@
       echo 'No estas registrado';
       exit;
   }
-      if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == user) {
+      if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == 'user') {
           $logueado = $_SESSION['username'];
           $imagen = $_SESSION['user_image']; ?>
 <?php
@@ -36,7 +36,9 @@
           /* Consultas de selección que devuelven un conjunto de resultados */
           if ($result = $connection->query("SELECT * from films
             where film_id = '$id';")) {
-              $obj = $result->fetch_object(); ?>
+              $obj = $result->fetch_object();
+              echo"<a href='./pruebapdf.php?id=$obj->film_id''>imprimir</a>";
+?>
 
       <div id="contenedor_global">
 
@@ -106,12 +108,12 @@
 
       if ($valora !=='1' && $valora !=='2' && $valora !=='3' && $valora !=='4' && $valora !=='5') {
       $estrella=$_POST['estrellas'];
-      $res = $connection->query("INSERT INTO `proyecto`.`rate_films` (`user_id` ,`film_id` ,`comments` ,`grade`)
+      $res = $connection->query("INSERT INTO rate_films (`user_id` ,`film_id` ,`comments` ,`grade`)
      VALUES ('$objeto44->user_id',  '$id',  '',  '$estrella');");
     }else {
       $estrella=$_POST['estrellas'];
-      $res2 = $connection->query("UPDATE  `proyecto`.`rate_films` SET  `grade` =  '$estrella'
-        WHERE  `rate_films`.`user_id` ='$objeto44->user_id' AND  `rate_films`.`film_id` ='$id';");
+      $res2 = $connection->query("UPDATE rate_films SET  `grade` =  '$estrella'
+        WHERE  `rate_films`.`user_id` ='$objeto44->user_id' AND film_id ='$id';");
     }
     }
 
@@ -194,6 +196,7 @@
                             echo '</tr>';
                         }
                         }
+
 
         ?>
 

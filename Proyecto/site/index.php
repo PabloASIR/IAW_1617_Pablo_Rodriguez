@@ -1,33 +1,46 @@
 <!DOCTYPE html PUBLIC>
 <html>
+<?php
+session_start();
 
+//echo '()<img src="$imagen" width=80% />)';
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+} else {
+    echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=../sign_in/login.html">';
+    session_destroy();
+    echo 'No estas registrado';
+    exit;
+}
+    if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == 'user') {
+        $logueado = $_SESSION['username'];
+        $imagen = $_SESSION['user_image'];
+
+ include_once("../connection.php");
+ ?>
 <head>
     <title>indice</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="Smart Bottom Slide Out Menu" />
     <meta name="keywords" content="jquery, fancy, bottom, navigation, menu" />
-    <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href=<?php
+    $consulta="SELECT user_theme from users where user_login='$logueado';";
+    $result = $connection->query($consulta);
+    $obj=$result->fetch_object();
+    $tema=$obj->user_theme;
+
+    if ($tema==1) {
+      echo "styletheme1.css";
+    }if ($tema==2) {
+      echo "styletheme2.css";
+    }if($tema==3) {
+      echo "styletheme3.css";
+    }
+    ?> type="text/css" media="screen" />
 
 </head>
 
 <body>
-  <?php
-  session_start();
 
-  //echo '()<img src="$imagen" width=80% />)';
-  if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-  } else {
-      echo '<META HTTP-EQUIV="Refresh" CONTENT="3; URL=../sign_in/login.html">';
-      session_destroy();
-      echo 'No estas registrado';
-      exit;
-  }
-      if (isset($_SESSION['user_nicename']) && $_SESSION['user_nicename'] == user) {
-          $logueado = $_SESSION['username'];
-          $imagen = $_SESSION['user_image'];
-          include_once("../connection.php");
-
-           ?>
 
       <div id="contenedor_global">
 
@@ -49,8 +62,13 @@
 
 <div id="contenido">
   <li>Esta es la pestaña del home</li><br>
-Actualmente no se encuentra disponible ninguna funcion de esta pestaña<br>
-Futura apertura<br>
+
+
+<a href='color/gris.php?usuario=<?php echo $logueado; ?>'><img width="40px" height="40px" src="img/gris.png"  /></a>
+<a href='color/rojo.php?usuario=<?php echo $logueado; ?>'><img width="40px" height="40px" src="img/rojo.png"  /></a>
+<a href='color/verde.php?usuario=<?php echo $logueado; ?>'><img width="40px" height="40px" src="img/verde.png"  /></a>
+
+<br>
 
 </div>
 

@@ -10,12 +10,10 @@
 
       <?php
       $id = $_GET['id'];
-      $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
+      //CREATING THE CONNECTION
+      include_once("../connection.php");
 
-      if ($connection->connect_errno) {
-          printf("Connection failed: %s\n", $connection->connect_error);
-          exit();
-      }
+
       if ($result = $connection->query("SELECT * from users
         where user_id = '$id';")) {
 
@@ -34,9 +32,9 @@
 //isset($username)&&
 
 if ($state == 'user' OR 'admin') {
-  $consulta= "UPDATE  `proyecto`.`users` SET  `user_nicename` =  'banned' WHERE  `users`.`user_id` =$id;";
+  $consulta= "UPDATE users SET  `user_nicename` =  'banned' WHERE user_id =$id;";
 }if ($state == 'banned') {
-  $consulta= "UPDATE  `proyecto`.`users` SET  `user_nicename` =  'user' WHERE  `users`.`user_id` =$id;";
+  $consulta= "UPDATE users SET  `user_nicename` =  'user' WHERE user_id =$id;";
 }else {
   echo"error al banear";
 

@@ -80,7 +80,7 @@
       var_dump("$tmp_file --- $target_file");
       move_uploaded_file($tmp_file, $target_file);
 
-      $consulta= "INSERT INTO  `proyecto`.`news` (
+      $consulta= "INSERT INTO news (
 `news_id` ,`news_info` ,`news_image` ,`news_title` ,`news_date` ,`news_url` ,`serie_id` ,`film_id`)
 VALUES (NULL ,  '$info',  '$target_file',  '$title',  '$date',  '$url',  NULL, NULL
 );";
@@ -91,7 +91,7 @@ VALUES (NULL ,  '$info',  '$target_file',  '$title',  '$date',  '$url',  NULL, N
           print_r("$consulta");
          echo "Query Error";
       } else {
-          echo "New FILM added";
+          echo "New NEWS added";
       }
       echo '<br>';
       echo "<form action='newfilm.php'>

@@ -13,13 +13,10 @@
     <body>
       <?php
             //CREATING THE CONNECTION
-            $connection = new mysqli('localhost', 'root', 'usuario', 'proyecto');
+            include_once("../connection.php");
 
-            //TESTING IF THE CONNECTION WAS RIGHT
-            if ($connection->connect_errno) {
-                printf("Connection failed: %s\n", $connection->connect_error);
-                exit();
-            }
+
+
             //MAKING A SELECT QUERY
             /* Consultas de selección que devuelven un conjunto de resultados */
             if ($result = $connection->query('SELECT * FROM users;')) {
@@ -90,6 +87,7 @@
 
     <input type="button" value="Volver" onClick="location.href='../sign_in/panel-control.php'" />
 
+    <input type="button" value="imprimir" onClick="location.href='imprimir.php'" />
 
       <script type="text/javascript" src=" "></script>
     </body>

@@ -47,8 +47,8 @@
         //$image=$_POST['image'];
 
         //consulta
-        $consulta="UPDATE  `proyecto`.`news` SET  `news_info` =  '$info',
-        `news_title` =  '$title',`news_date` =  '$date',`news_url` =  '$url' WHERE  `news`.`news_id` =$id;";
+        $consulta="UPDATE news SET  `news_info` =  '$info',
+        `news_title` =  '$title',`news_date` =  '$date',`news_url` =  '$url' WHERE news_id =$id;";
 
         var_dump($consulta);
         if ($result = $connection->query($consulta))

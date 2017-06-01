@@ -49,7 +49,7 @@
         $image=$_POST['image'];
 
         //consulta
-        $consulta="UPDATE  `proyecto`.`films` SET
+        $consulta="UPDATE films SET
         `film_gender` =  '$gender',
         `film_name` =  '$name',
         `film_sinopsis` =  '$sinopsis',
@@ -57,7 +57,7 @@
         `film_trailer` =  '$trailer',
         `film_date_release` =  '$date_release',
         `film_image` =  '$image'
-        WHERE  `films`.`film_id` =$id;";
+        WHERE  film_id =$id;";
 
         var_dump($consulta);
         if ($result = $connection->query($consulta))
